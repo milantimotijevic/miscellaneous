@@ -15,11 +15,18 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
             arr.splice(i, 1);
             i--;
         } else if(cheapestStratWrapper.strategy === 'insertion') {
-
+            /*
+            adding 'next' duplicate ahead, then skipping to the real 'next'; the real 'next' will be guaranteed
+            not to clash with its predecessor and can we freely run subsequent checks
+             */
+            arr.splice(i, 0, next);
+            i++;
         } else { // strat will be 'alteration', no other possibility
-
+            arr[i] = cheapestStratWrapper.newValue; // other checks ensure this value is available
         }
     }
+    // END
+    console.log('Total Cost: ' + totalCost);
 
     function isAcceptableDifference(a, b) {
         const difference = Math.abs(a - b);
@@ -62,9 +69,6 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
         return {cost: Math.abs(curr - postChangeValue), newValue: postChangeValue};
     }
 
-    function findLastAlterationInducedNumber() {
-
-    }
 }
 
 function findSmallestInArr(arr) {
