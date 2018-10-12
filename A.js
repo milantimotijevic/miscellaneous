@@ -19,7 +19,7 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
             adding 'next' duplicate ahead, then skipping to the real 'next'; the real 'next' will be guaranteed
             not to clash with its predecessor and can we freely run subsequent checks
              */
-            arr.splice(i, 0, next);
+            arr.splice(i + 1, 0, next);
             i++;
         } else { // strat will be 'alteration', no other possibility
             arr[i] = cheapestStratWrapper.newValue; // other checks ensure this value is available
@@ -91,5 +91,5 @@ function findPropNameOfSmallestInObj(obj) {
     return smallest;
 }
 
-calculateBeautificationCost(100, 1, 2, [1, 7, 5]);
+calculateBeautificationCost(100, 1, 5, [1, 50, 7]);
 
