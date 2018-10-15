@@ -17,7 +17,7 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
         } else if(cheapestStratWrapper.strategy === 'insertion') {
             /*
             adding 'next' duplicate ahead, then skipping to the real 'next'; the real 'next' will be guaranteed
-            not to clash with its predecessor and can we freely run subsequent checks
+            not to clash with its predecessor and we can freely run subsequent checks
              */
             arr.splice(i + 1, 0, next);
             i++;
@@ -52,16 +52,10 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
     }
 
     function calculateCostOfAlteration(prev, curr, nxt) {
-        const lowestPossible = prev - acceptableDifference;
-        const highestPossible = prev + acceptableDifference;
+        const lowestPossible = prev - acceptableDifference || 0;
+        const highestPossible = prev + acceptableDifference || 255;
 
-        var necessaryChange;
-        if(curr > nxt) {
-            necessaryChange = nxt + acceptableDifference;
-        } else {
-            necessaryChange = nxt - acceptableDifference;
-        }
-        const postChangeValue = curr + necessaryChange;
+        const postChangeValue = curr + Math.abs(nxt - acceptableDifference);
 
         if(postChangeValue > highestPossible || postChangeValue < lowestPossible) {
             return {cost: 999999, newValue: postChangeValue}; // placeholder for 'modification not possible without messing up relations with previous neighbor'
@@ -91,5 +85,5 @@ function findPropNameOfSmallestInObj(obj) {
     return smallest;
 }
 
-calculateBeautificationCost(100, 1, 5, [1, 50, 7]);
+calculateBeautificationCost(6, 6, 2, [1, 7, 5]);
 
