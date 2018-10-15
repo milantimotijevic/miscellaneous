@@ -38,7 +38,6 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
 
     function findCheapestStrat(prev, curr, nxt) {
         const costOfInsertion = calculateCostOfInsertion(curr, nxt);
-        console.log(costOfInsertion);
         const alterationCostWrapper = calculateCostOfAlteration(prev, curr, nxt);
         const costOfAlteration = alterationCostWrapper.cost;
 
@@ -55,13 +54,13 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
     function calculateCostOfAlteration(prev, curr, nxt) {
         const lowestPossible = prev - acceptableDifference || 0;
         const highestPossible = prev + acceptableDifference || 255;
-
-        const postChangeValue = curr + Math.abs(nxt - acceptableDifference);
+        const minimumAcceptableValue = Math.abs(nxt - acceptableDifference);
+        const postChangeValue = curr + minimumAcceptableValue;
 
         if(postChangeValue > highestPossible || postChangeValue < lowestPossible) {
             return {cost: 999999, newValue: postChangeValue}; // placeholder for 'modification not possible without messing up relations with previous neighbor'
         }
-        return {cost: Math.abs(curr - postChangeValue), newValue: postChangeValue};
+        return {cost: Math.abs(curr - minimumAcceptableValue), newValue: postChangeValue};
     }
 
 }
