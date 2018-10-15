@@ -38,6 +38,7 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
 
     function findCheapestStrat(prev, curr, nxt) {
         const costOfInsertion = calculateCostOfInsertion(curr, nxt);
+        console.log(costOfInsertion);
         const alterationCostWrapper = calculateCostOfAlteration(prev, curr, nxt);
         const costOfAlteration = alterationCostWrapper.cost;
 
@@ -48,7 +49,7 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
 
     function calculateCostOfInsertion(curr, nxt) {
         const diff = Math.abs(curr - nxt);
-        return Math.floor(diff / acceptableDifference);
+        return Math.floor(diff / acceptableDifference) * insertionCost;
     }
 
     function calculateCostOfAlteration(prev, curr, nxt) {
