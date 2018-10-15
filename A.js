@@ -85,5 +85,5 @@ function findPropNameOfSmallestInObj(obj) {
     return smallest;
 }
 
-calculateBeautificationCost(1, 1, 2, [6, 3, 7]);
+calculateBeautificationCost(100, 1, 2, [10, 18, 52]);
 
