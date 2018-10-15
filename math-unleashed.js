@@ -36,9 +36,18 @@ function calculateAdjustmentCost(deletionCost, insertionCost, acceptableDifferen
         return smallest;
     }
 
-    console.log(matrix);
+    return findSmallestInArr(matrix[matrix.length - 1]);
 }
 
+function findSmallestInArr(arr) {
+    let smallest = arr[0];
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i] < smallest) {
+            smallest = arr[i];
+        }
+    }
+    return smallest;
+}
 
-
-calculateAdjustmentCost(6, 6, 2, [6, 3, 7]);
+const result = calculateAdjustmentCost(6, 6, 2, [6, 3, 7]);
+console.log(result);
