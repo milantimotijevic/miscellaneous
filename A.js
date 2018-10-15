@@ -5,7 +5,7 @@ function calculateBeautificationCost(deletionCost, insertionCost, acceptableDiff
         const previous = arr[i - 1];
         const current = arr[i];
         const next = arr[i + 1];
-        if(isAcceptableDifference(previous, current) && isAcceptableDifference(current, next)) {
+        if(isAcceptableDifference(previous, current) && isAcceptableDifference(current, next) || i === arr.length - 1) {
             continue;
         }
         const cheapestStratWrapper = findCheapestStrat(previous, current, next);
@@ -85,5 +85,5 @@ function findPropNameOfSmallestInObj(obj) {
     return smallest;
 }
 
-calculateBeautificationCost(6, 6, 2, [1, 7, 5]);
+calculateBeautificationCost(1, 1, 2, [6, 3, 7]);
 
